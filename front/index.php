@@ -9,6 +9,8 @@ require_once __DIR__ . '/../api/models/Products.php';
 $users = [];
 $products = [];
 $loginError = '';
+$connectedUser = null;
+$profileAlertMessage = '';
 
 if (isset($_GET['action']) && $_GET['action'] === 'logout') {
     $_SESSION = [];
@@ -55,6 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     $_SESSION['token'] = $token;
                     $_SESSION['user_email'] = $user['email'];
+                    $_SESSION['user_id'] = $user['id'];
 
                     header('Location: /front/index.php');
                     exit;
@@ -65,8 +68,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $isConnected = !empty($_SESSION['token']);
-$frontToken = $isConnected ? ($_SESSION['token'] ?? '') : '';
-$frontUserEmail = $isConnected ? ($_SESSION['user_email'] ?? '') : '';
+
+if ($isConnected && !empty($_SESSION['user_id'])) {
+    $database = new Database();
+    $conn = $database->getConnection();
+
+    if ($conn) {
+        $connectedUser = (new Users($conn))->getById($_SESSION['user_id']);
+    }
+}
+
+if ($isConnected && $connectedUser) {
+    $profileAlertMessage = "Prénom: " . $connectedUser['first_name']
+        . "\nNom: " . $connectedUser['last_name']
+        . "\nEmail: " . $connectedUser['email'];
+}
 
 if ($isConnected && isset($_GET['action']) && $_GET['action'] === 'all') {
     $database = new Database();
@@ -103,7 +119,10 @@ if ($isConnected && isset($_GET['action']) && $_GET['action'] === 'all') {
                 <button type="submit">Connexion</button>
             </form>
         <?php else: ?>
-            <p style="margin: 0; color: #1b5e20;">Connecté : <?= htmlspecialchars($_SESSION['user_email'] ?? '') ?></p>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <p style="margin: 0; color: #1b5e20;">Connecté : <?= htmlspecialchars($_SESSION['user_email'] ?? '') ?></p>
+                <button type="button" onclick="alert(<?= htmlspecialchars(json_encode($profileAlertMessage), ENT_QUOTES, 'UTF-8') ?>)">Voir profil</button>
+            </div>
             <div style="display: flex; gap: 10px;">
                 <a href="?action=all"><button type="button">Get DATA</button></a>
                 <a href="?action=clear"><button type="button">Clear</button></a>
@@ -160,22 +179,6 @@ if ($isConnected && isset($_GET['action']) && $_GET['action'] === 'all') {
         </div>
     <?php endif; ?>
 
-    <script>
-        (() => {
-            const token = <?= json_encode($frontToken) ?>;
-            const userEmail = <?= json_encode($frontUserEmail) ?>;
-
-            if (token) {
-                sessionStorage.setItem('token', token);
-                if (userEmail) {
-                    sessionStorage.setItem('user_email', userEmail);
-                }
-            } else {
-                sessionStorage.removeItem('token');
-                sessionStorage.removeItem('user_email');
-            }
-        })();
-    </script>
 </body>
 
 </html>
