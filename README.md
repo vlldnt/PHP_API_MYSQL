@@ -1,5 +1,7 @@
 # PHP MySQL API — Apprends en construisant
 
+Ce projet est un exercice pour apprendre à créer une API en PHP avec MySQL.
+
 ## Structure du projet
 
 ```
