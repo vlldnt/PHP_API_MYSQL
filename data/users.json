@@ -1,0 +1,26 @@
+[
+  {
+    "nom": "Dupont",
+    "prenom": "Jean",
+    "email": "jean.dupont@mail.com",
+    "mot_de_passe": "password123"
+  },
+  {
+    "nom": "Martin",
+    "prenom": "Sophie",
+    "email": "sophie.martin@mail.com",
+    "mot_de_passe": "sophie456"
+  },
+  {
+    "nom": "Bernard",
+    "prenom": "Lucas",
+    "email": "lucas.bernard@mail.com",
+    "mot_de_passe": "lucas789"
+  },
+  {
+    "nom": "Admin",
+    "prenom": "Root",
+    "email": "admin@mail.com",
+    "mot_de_passe": "admin000"
+  }
+]
