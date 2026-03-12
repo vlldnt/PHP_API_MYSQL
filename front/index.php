@@ -2,9 +2,9 @@
 session_start();
 
 require_once __DIR__ . '/../api/config/database.php';
-require_once __DIR__ . '/../api/config/jwt.php';
-require_once __DIR__ . '/../api/models/Users.php';
-require_once __DIR__ . '/../api/models/Products.php';
+require_once __DIR__ . '/../api/utils/JwtHandler.php';
+require_once __DIR__ . '/../api/models/User.php';
+require_once __DIR__ . '/../api/models/Product.php';
 
 $users = [];
 $products = [];
@@ -32,21 +32,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!$conn) {
             $loginError = 'Connexion à la base impossible.';
         } else {
-            $usersModel = new Users($conn);
-            $user = $usersModel->findAuthByEmail($email);
+            $usersModel = new User($conn);
+            $user = $usersModel->findByEmail($email);
 
             $isValid = $user && (password_verify($password, $user['password']) || hash_equals($user['password'], $password));
 
             if (!$isValid) {
                 $loginError = 'Identifiants invalides.';
             } else {
-                $jwtSecret = getJwtSecret();
+                $jwtSecret = JwtHandler::getSecret();
 
                 if (!$jwtSecret) {
                     $loginError = 'JWT secret manquant dans .env.';
                 } else {
                     $now = time();
-                    $token = createJwt([
+                    $token = JwtHandler::encode([
                         'sub' => $user['id'],
                         'email' => $user['email'],
                         'first_name' => $user['first_name'],
@@ -74,7 +74,7 @@ if ($isConnected && !empty($_SESSION['user_id'])) {
     $conn = $database->getConnection();
 
     if ($conn) {
-        $connectedUser = (new Users($conn))->getById($_SESSION['user_id']);
+        $connectedUser = (new User($conn))->getById($_SESSION['user_id']);
     }
 }
 
@@ -89,8 +89,8 @@ if ($isConnected && isset($_GET['action']) && $_GET['action'] === 'all') {
     $conn = $database->getConnection();
 
     if ($conn) {
-        $users = (new Users($conn))->getAll();
-        $products = (new Products($conn))->getAll();
+        $users = (new User($conn))->getAll();
+        $products = (new Product($conn))->getAll();
     }
 }
 ?>

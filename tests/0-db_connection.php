@@ -32,5 +32,5 @@ try {
 
 // Déconnexion
 $pdo = null;
-$database->conn = null;
+$database->close();
 echo "Déconnexion effectuée.\n";

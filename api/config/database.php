@@ -5,7 +5,7 @@ class Database {
     private $db_name;
     private $username;
     private $password;
-    public $conn;
+    private $conn;
 
     public function __construct()
     {
@@ -37,6 +37,11 @@ class Database {
             return null;
         }
         return $this->conn;
+    }
+
+    public function close(): void
+    {
+        $this->conn = null;
     }
 
     public function getDbName()
