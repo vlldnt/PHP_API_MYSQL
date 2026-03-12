@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/database.php';
+require_once __DIR__ . '/../api/config/database.php';
 
 $database = new Database();
 $pdo = $database->getConnection();
@@ -20,6 +20,12 @@ try {
     $stmt = $pdo->query("SELECT COUNT(*) AS total FROM products");
     $result = $stmt->fetch();
     echo "Table 'products' OK : " . $result['total'] . " enregistrement(s)\n";
+
+    // Non existent table test
+    $stmt = $pdo->query("SELECT COUNT(*) AS total FROM nonexistant");
+    $result = $stmt->fetch();
+    echo "Table 'products' OK : " . $result['total'] . " enregistrement(s)\n";
+
 } catch (PDOException $e) {
     echo "Erreur requête SQL : " . $e->getMessage() . "\n";
 }
