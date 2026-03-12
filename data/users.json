@@ -1,26 +1,26 @@
 [
   {
-    "nom": "Dupont",
-    "prenom": "Jean",
+    "first_name": "Jean",
+    "last_name": "Dupont",
     "email": "jean.dupont@mail.com",
-    "mot_de_passe": "password123"
+    "password": "password123"
   },
   {
-    "nom": "Martin",
-    "prenom": "Sophie",
+    "first_name": "Sophie",
+    "last_name": "Martin",
     "email": "sophie.martin@mail.com",
-    "mot_de_passe": "sophie456"
+    "password": "sophie456"
   },
   {
-    "nom": "Bernard",
-    "prenom": "Lucas",
+    "first_name": "Lucas",
+    "last_name": "Bernard",
     "email": "lucas.bernard@mail.com",
-    "mot_de_passe": "lucas789"
+    "password": "lucas789"
   },
   {
-    "nom": "Admin",
-    "prenom": "Root",
+    "first_name": "Root",
+    "last_name": "Admin",
     "email": "admin@mail.com",
-    "mot_de_passe": "admin000"
+    "password": "admin000"
   }
 ]

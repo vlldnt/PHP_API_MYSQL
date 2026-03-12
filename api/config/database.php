@@ -1,11 +1,21 @@
 <?php
 
 class Database {
-    private $host = '127.0.0.1';
-    private $db_name = 'php_learn';
-    private $username = 'root';
-    private $password = 'awlmpzw12';
+    private $host;
+    private $db_name;
+    private $username;
+    private $password;
     public $conn;
+
+    public function __construct()
+    {
+        $env = parse_ini_file(__DIR__ . '/../../.env');
+
+        $this->host = $env['DB_HOST'];
+        $this->db_name = $env['DB_NAME'];
+        $this->username = $env['DB_USERNAME'];
+        $this->password = $env['DB_PASSWORD'];
+    }
 
     public function getConnection()
     {

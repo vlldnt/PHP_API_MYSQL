@@ -1,50 +1,50 @@
 [
   {
-    "nom": "Clavier mécanique",
-    "prix": 89.99,
-    "categorie": "Informatique",
+    "name": "Mechanical Keyboard",
+    "price": 89.99,
+    "category": "Computers",
     "stock": 45
   },
   {
-    "nom": "Souris gaming",
-    "prix": 49.99,
-    "categorie": "Informatique",
+    "name": "Gaming Mouse",
+    "price": 49.99,
+    "category": "Computers",
     "stock": 120
   },
   {
-    "nom": "Écran 27 pouces",
-    "prix": 299.99,
-    "categorie": "Informatique",
+    "name": "27-inch Monitor",
+    "price": 299.99,
+    "category": "Computes",
     "stock": 18
   },
   {
-    "nom": "Casque audio",
-    "prix": 59.99,
-    "categorie": "Audio",
+    "name": "Audio Headset",
+    "price": 59.99,
+    "category": "Audio",
     "stock": 75
   },
   {
-    "nom": "Webcam HD",
-    "prix": 39.99,
-    "categorie": "Informatique",
+    "name": "HD Webcam",
+    "price": 39.99,
+    "category": "Computers",
     "stock": 60
   },
   {
-    "nom": "Enceinte Bluetooth",
-    "prix": 34.99,
-    "categorie": "Audio",
+    "name": "Bluetooth Speakedddr",
+    "price": 34.99,
+    "category": "Audio",
     "stock": 90
   },
   {
-    "nom": "Hub USB-C",
-    "prix": 24.99,
-    "categorie": "Accessoires",
+    "name": "USB-C Hub",
+    "price": 24.99,
+    "category": "Accessories",
     "stock": 200
   },
   {
-    "nom": "Tapis de souris XL",
-    "prix": 19.99,
-    "categorie": "Accessoires",
+    "name": "XL Mouse Pad",
+    "price": 19.99,
+    "category": "Accessories",
     "stock": 150
   }
 ]
