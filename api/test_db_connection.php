@@ -7,7 +7,24 @@ $pdo = $database->getConnection();
 
 if (!$pdo) {
     echo ("KO: database connection failed\n");
-    exit(404);
+    exit(1);
 }
 echo "Bien connecté à la base de données : " . $database->getDbName() . "\n";
-exit(200);
+
+// Test requête sur les tables users et products
+try {
+    $stmt = $pdo->query("SELECT COUNT(*) AS total FROM users");
+    $result = $stmt->fetch();
+    echo "Table 'users' OK : " . $result['total'] . " enregistrement(s)\n";
+
+    $stmt = $pdo->query("SELECT COUNT(*) AS total FROM products");
+    $result = $stmt->fetch();
+    echo "Table 'products' OK : " . $result['total'] . " enregistrement(s)\n";
+} catch (PDOException $e) {
+    echo "Erreur requête SQL : " . $e->getMessage() . "\n";
+}
+
+// Déconnexion
+$pdo = null;
+$database->conn = null;
+echo "Déconnexion effectuée.\n";

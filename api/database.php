@@ -1,7 +1,7 @@
 <?php
 
 class Database {
-    private $host = 'localhost';
+    private $host = '127.0.0.1';
     private $db_name = 'php_learn';
     private $username = 'root';
     private $password = 'awlmpzw12';
